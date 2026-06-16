@@ -255,6 +255,7 @@
             <div class="field-label">Avatar</div>
             <div style="flex:1;display:flex;flex-direction:column;gap:0.3rem;">
               <input class="file-input" id="p-avatar-file" type="file" accept="image/*" onchange="previewFile(this,'p-avatar-preview')">
+              <input class="field-input" id="p-avatar-url" type="url" placeholder="or paste image URL" style="font-size:0.75rem;">
               <img class="preview-thumb" id="p-avatar-preview" src="">
               <div style="display:flex;gap:0.5rem;align-items:center;"><div class="upload-status" id="p-avatar-status"></div><span class="remove-link" onclick="removeField('avatar_url')">remove</span></div>
             </div>
@@ -263,6 +264,7 @@
             <div class="field-label">Banner</div>
             <div style="flex:1;display:flex;flex-direction:column;gap:0.3rem;">
               <input class="file-input" id="p-banner-file" type="file" accept="image/*" onchange="previewFile(this,'p-banner-preview')">
+              <input class="field-input" id="p-banner-url" type="url" placeholder="or paste image URL" style="font-size:0.75rem;">
               <img class="preview-thumb" id="p-banner-preview" src="" style="width:100%;height:40px;border-radius:8px;">
               <div style="display:flex;gap:0.5rem;align-items:center;"><div class="upload-status" id="p-banner-status"></div><span class="remove-link" onclick="removeField('banner_url')">remove</span></div>
             </div>
@@ -271,6 +273,7 @@
             <div class="field-label">Page background</div>
             <div style="flex:1;display:flex;flex-direction:column;gap:0.3rem;">
               <input class="file-input" id="p-bg-file" type="file" accept="image/*" onchange="previewFile(this,'p-bg-preview')">
+              <input class="field-input" id="p-bg-url" type="url" placeholder="or paste image URL" style="font-size:0.75rem;">
               <div style="display:flex;gap:0.5rem;align-items:center;"><div class="upload-status" id="p-bg-status"></div><span class="remove-link" onclick="removeField('background_url')">remove</span></div>
             </div>
           </div>
@@ -336,6 +339,7 @@
           <div class="field-row">
             <div class="field-label">Audio file</div>
             <input class="file-input" id="m-url-file" type="file" accept="audio/*">
+            <input class="field-input" id="m-url" type="url" placeholder="or paste audio URL (mp3/ogg)" style="font-size:0.75rem;margin-top:0.3rem;">
             <div class="upload-status" id="m-url-status"></div>
           </div>
           <div class="field-row">
@@ -576,15 +580,15 @@ function populateFields(){
   document.getElementById('ov-views').textContent=p.views??0;
   document.getElementById('p-displayname').value=p.display_name||'';
   document.getElementById('p-bio').value=p.bio||'';
-  if(p.avatar_url){const el=document.getElementById('p-avatar-preview');el.src=p.avatar_url;el.classList.add('show');}
-  if(p.banner_url){const el=document.getElementById('p-banner-preview');el.src=p.banner_url;el.classList.add('show');}
-  if(p.background_url)document.getElementById('p-bg-status').textContent='Background set';
+  if(p.avatar_url){document.getElementById('p-avatar-url').value=p.avatar_url;const el=document.getElementById('p-avatar-preview');el.src=p.avatar_url;el.classList.add('show');}
+  if(p.banner_url){document.getElementById('p-banner-url').value=p.banner_url;const el=document.getElementById('p-banner-preview');el.src=p.banner_url;el.classList.add('show');}
+  if(p.background_url)document.getElementById('p-bg-url').value=p.background_url;
   ['discord','twitter','instagram','youtube','github','twitch','tiktok'].forEach(k=>{
     const el=document.getElementById('s-'+k);if(el)el.value=p[k]||'';
   });
   discordStatus=p.discord_status||'offline';
   document.querySelectorAll('.status-opt').forEach(el=>{el.classList.toggle('active',el.dataset.status===discordStatus);});
-  if(p.audio_url)document.getElementById('m-url-status').textContent='Audio uploaded: ' + p.audio_name;
+  if(p.audio_url){document.getElementById('m-url').value=p.audio_url;document.getElementById('m-url-status').textContent='Audio: '+p.audio_name;}
   document.getElementById('m-name').value=p.audio_name||'';
   document.getElementById('m-artist').value=p.audio_artist||'';
   document.getElementById('a-rain').checked=p.rain!==false;
@@ -664,11 +668,14 @@ async function saveProfile(){
   const fields={display_name:document.getElementById('p-displayname').value,bio:document.getElementById('p-bio').value};
   try{
     const af=document.getElementById('p-avatar-file').files[0];
-    if(af){const url=await uploadFile(af,'avatar');fields.avatar_url=url;document.getElementById('p-avatar-status').className='upload-status ok';document.getElementById('p-avatar-status').textContent='Uploaded';}
+    if(af){try{const url=await uploadFile(af,'avatar');fields.avatar_url=url;document.getElementById('p-avatar-status').className='upload-status ok';document.getElementById('p-avatar-status').textContent='Uploaded';}catch(e){flashMsg('profile-msg','Upload error: '+e.message);return;}}
+    else{const au=document.getElementById('p-avatar-url').value;if(au)fields.avatar_url=au;}
     const bf=document.getElementById('p-banner-file').files[0];
-    if(bf){const url=await uploadFile(bf,'banner');fields.banner_url=url;document.getElementById('p-banner-status').className='upload-status ok';document.getElementById('p-banner-status').textContent='Uploaded';}
+    if(bf){try{const url=await uploadFile(bf,'banner');fields.banner_url=url;document.getElementById('p-banner-status').className='upload-status ok';document.getElementById('p-banner-status').textContent='Uploaded';}catch(e){flashMsg('profile-msg','Upload error: '+e.message);return;}}
+    else{const bu=document.getElementById('p-banner-url').value;if(bu)fields.banner_url=bu;}
     const bgf=document.getElementById('p-bg-file').files[0];
-    if(bgf){const url=await uploadFile(bgf,'bg');fields.background_url=url;document.getElementById('p-bg-status').className='upload-status ok';document.getElementById('p-bg-status').textContent='Uploaded';}
+    if(bgf){try{const url=await uploadFile(bgf,'bg');fields.background_url=url;document.getElementById('p-bg-status').className='upload-status ok';document.getElementById('p-bg-status').textContent='Uploaded';}catch(e){flashMsg('profile-msg','Upload error: '+e.message);return;}}
+    else{const bgu=document.getElementById('p-bg-url').value;if(bgu)fields.background_url=bgu;}
   }catch(e){flashMsg('profile-msg','Upload error: '+e.message);toast('Upload failed','err');return;}
   const r=await supaFetch(`/rest/v1/profiles?id=eq.${id}`,{method:'PATCH',body:JSON.stringify(fields)});
   flashMsg('profile-msg',r.ok?'Saved!':'Error saving.');
@@ -695,7 +702,8 @@ async function saveMusic(){
   const fields={audio_name:document.getElementById('m-name').value,audio_artist:document.getElementById('m-artist').value};
   try{
     const mf=document.getElementById('m-url-file').files[0];
-    if(mf){const url=await uploadFile(mf,'audio');fields.audio_url=url;document.getElementById('m-url-status').className='upload-status ok';document.getElementById('m-url-status').textContent='Uploaded';}
+    if(mf){try{const url=await uploadFile(mf,'audio');fields.audio_url=url;document.getElementById('m-url-status').className='upload-status ok';document.getElementById('m-url-status').textContent='Uploaded';}catch(e){flashMsg('music-msg','Upload error: '+e.message);return;}}
+    else{const mu=document.getElementById('m-url').value;if(mu)fields.audio_url=mu;}
   }catch(e){flashMsg('music-msg','Upload error: '+e.message);toast('Upload failed','err');return;}
   const r=await supaFetch(`/rest/v1/profiles?id=eq.${id}`,{method:'PATCH',body:JSON.stringify(fields)});
   flashMsg('music-msg',r.ok?'Saved!':'Error saving.');
@@ -852,3 +860,4 @@ function logout(){
 </script>
 </body>
 </html>
+
