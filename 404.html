@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cxt — redirecting</title>
+<style>body{background:#000;color:#fff;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;font-size:0.85rem;opacity:0.4;}</style>
+</head>
+<body>
+<script>
+const path = location.pathname.replace(/\/$/, '').split('/').pop().replace(/\.html$/i, '');
+const known = ['index','dashboard','profile','404','supabase_setup'];
+if (path && !known.includes(path)) {
+  window.location.replace('/profile.html?u=' + encodeURIComponent(path));
+} else {
+  window.location.replace('/');
+}
+</script>
+loading...
+</body>
+</html>
