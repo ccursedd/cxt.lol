@@ -135,6 +135,58 @@
   .widget-btn{background:var(--fg);color:#000;border:1px solid var(--border);border-radius:6px;padding:0.15rem 0.5rem;cursor:pointer;font-size:0.7rem;transition:background 0.2s;font-family:inherit;}
   .widget-btn:hover{background:rgba(0,0,0,0.08);}
   .staff-badge{display:inline-block;font-size:0.55rem;font-weight:700;letter-spacing:0.08em;padding:0.15rem 0.45rem;border-radius:6px;background:var(--fg);color:var(--bg);vertical-align:middle;margin-left:0.5rem;}
+
+  /* Additional black text on all interactive buttons */
+  .auth-submit, .claim-modal-btn, .save-btn, .widget-btn, .file-input::file-selector-button, .nav-logout, .side-btn, .preview-link, .status-opt, .remove-link, .color-swatch, #staff-claim-btn, #staff-remove-btn {
+    color: #000000 !important;
+  }
+  /* Keep logout button style consistent but text black */
+  .nav-logout {
+    color: #000000 !important;
+    background: var(--fg) !important;
+    border-color: var(--border);
+  }
+  /* Side buttons text black when active/hover but maintain readability, keep default for inactive state muted but change to black for active/hover */
+  .side-btn.active, .side-btn:hover {
+    color: #000000 !important;
+    background: var(--fg) !important;
+  }
+  .side-btn {
+    color: var(--muted);
+  }
+  .side-btn:hover svg, .side-btn.active svg {
+    stroke: #000000 !important;
+  }
+  /* status options text black when active */
+  .status-opt.active {
+    color: #000000 !important;
+    background: var(--fg) !important;
+    border-color: var(--fg);
+  }
+  /* preview link text black on hover */
+  .preview-link:hover {
+    color: #000000 !important;
+    background: var(--fg);
+  }
+  /* remove link stays red-ish but ensure text readable */
+  .remove-link {
+    color: #ff6b6b !important;
+    opacity: 0.8;
+  }
+  .remove-link:hover {
+    color: #ff6b6b !important;
+    opacity: 1;
+  }
+  /* staff remove button override */
+  #staff-remove-btn {
+    background: rgba(255,80,80,0.2) !important;
+    color: #000000 !important;
+    border: 1px solid rgba(0,0,0,0.2) !important;
+  }
+  /* custom file upload button text */
+  .file-input::file-selector-button {
+    color: #000000 !important;
+  }
 </style>
 </head>
 <body>
@@ -420,10 +472,10 @@
             <div class="field-label">Staff rank</div>
             <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem;">You own an admin username. Claim the staff badge for your profile.</div>
             <button class="save-btn" id="staff-claim-btn" onclick="claimStaff()">Claim staff badge</button>
-            <button class="save-btn" id="staff-remove-btn" style="display:none;background:rgba(255,80,80,0.12);color:#ff6b6b;border:1px solid rgba(255,80,80,0.2);" onclick="removeStaff()">Remove staff badge</button>
+            <button class="save-btn" id="staff-remove-btn" style="display:none;" onclick="removeStaff()">Remove staff badge</button>
             <span class="save-msg" id="staff-msg"></span>
           </div>
-          <button class="save-btn" style="background:rgba(255,80,80,0.12);color:#ff6b6b;border:1px solid rgba(255,80,80,0.2);" onclick="if(confirm('Delete your account? This cannot be undone.'))deleteAccount()">Delete account</button>
+          <button class="save-btn" style="background:rgba(255,80,80,0.2);color:#000000;border:1px solid rgba(0,0,0,0.2);" onclick="if(confirm('Delete your account? This cannot be undone.'))deleteAccount()">Delete account</button>
         </div>
       </div>
     </main>
