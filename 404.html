@@ -47,20 +47,20 @@
     .handle{font-size:0.85rem;font-weight:500;color:var(--muted);margin-top:0.2rem;text-align:center;letter-spacing:0;}
     .bio{font-size:0.85rem;color:var(--muted-2);margin-top:0.7rem;text-align:center;max-width:300px;line-height:1.65;}
 
-    .badges-row{display:flex;gap:0.55rem;margin-top:1.4rem;justify-content:center;flex-wrap:wrap;}
-    .badge-circle{position:relative;width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.075);border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.95);cursor:default;box-shadow:0 1px 0 rgba(255,255,255,0.08) inset;transition:transform 0.25s var(--ease),box-shadow 0.25s var(--ease),border-color 0.25s var(--ease),background 0.25s var(--ease);}
-    .badge-circle:hover{transform:translateY(-2px) scale(1.06);border-color:rgba(255,255,255,0.28);background:rgba(255,255,255,0.12);box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 0 16px rgba(255,255,255,0.12);}
+    .badges-row{display:flex;gap:0.5rem;margin-top:1.55rem;justify-content:center;flex-wrap:wrap;}
+    .badge-circle{position:relative;width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.045);border:1px solid var(--border);color:rgba(255,255,255,0.92);cursor:default;box-shadow:0 1px 0 rgba(255,255,255,0.06) inset;transition:transform 0.25s var(--ease),box-shadow 0.25s var(--ease),border-color 0.25s var(--ease),background 0.25s var(--ease);}
+    .badge-circle:hover{transform:translateY(-2px) scale(1.06);border-color:rgba(255,255,255,0.24);background:rgba(255,255,255,0.09);box-shadow:0 1px 0 rgba(255,255,255,0.1) inset,0 0 16px rgba(255,255,255,0.1);}
     .badge-circle svg{width:16px;height:16px;position:relative;z-index:1;}
 
-    .socials-row{display:flex;gap:0.7rem;margin-top:1.4rem;justify-content:center;flex-wrap:wrap;}
-    .social-circle{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.075);border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.9);text-decoration:none;box-shadow:0 1px 0 rgba(255,255,255,0.08) inset;transition:transform 0.25s var(--ease),box-shadow 0.25s var(--ease),border-color 0.25s var(--ease),color 0.25s var(--ease),background 0.25s var(--ease);}
-    .social-circle:hover{transform:translateY(-2px) scale(1.05);border-color:rgba(255,255,255,0.28);color:var(--fg);background:rgba(255,255,255,0.12);box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 0 18px rgba(255,255,255,0.14);}
+    .socials-row{display:flex;gap:0.65rem;margin-top:1.55rem;justify-content:center;flex-wrap:wrap;}
+    .social-circle{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.045);border:1px solid var(--border);color:rgba(255,255,255,0.85);text-decoration:none;box-shadow:0 1px 0 rgba(255,255,255,0.06) inset;transition:transform 0.25s var(--ease),box-shadow 0.25s var(--ease),border-color 0.25s var(--ease),color 0.25s var(--ease),background 0.25s var(--ease);}
+    .social-circle:hover{transform:translateY(-2px) scale(1.05);border-color:rgba(255,255,255,0.24);color:var(--fg);background:rgba(255,255,255,0.09);box-shadow:0 1px 0 rgba(255,255,255,0.1) inset,0 0 18px rgba(255,255,255,0.12);}
     .social-circle svg{width:18px;height:18px;}
 
-    .stats-row{display:flex;gap:0.55rem;margin-top:1.6rem;justify-content:center;flex-wrap:wrap;}
-    .stat-pill{display:flex;align-items:center;gap:0.42rem;padding:0.48rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.055);font-size:0.76rem;font-weight:500;color:var(--muted-2);letter-spacing:0;font-variant-numeric:tabular-nums;transition:background 0.2s var(--ease),border-color 0.2s var(--ease);}
-    .stat-pill:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.18);}
-    .stat-pill svg{width:13px;height:13px;opacity:0.6;flex-shrink:0;}
+    .stats-row{display:flex;gap:0.5rem;margin-top:1.85rem;justify-content:center;flex-wrap:wrap;}
+    .stat-pill{display:flex;align-items:center;gap:0.4rem;padding:0.45rem 0.95rem;border-radius:999px;border:1px solid var(--border-soft);background:rgba(255,255,255,0.04);font-size:0.75rem;font-weight:500;color:var(--muted-2);letter-spacing:0;font-variant-numeric:tabular-nums;transition:background 0.2s var(--ease),border-color 0.2s var(--ease);}
+    .stat-pill:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.15);}
+    .stat-pill svg{width:13px;height:13px;opacity:0.55;flex-shrink:0;}
 
     .widgets{display:flex;flex-direction:column;gap:0.65rem;margin-top:1.6rem;}
     .widget-fade{animation:widgetIn 0.55s var(--ease) both;animation-delay:calc(0.08s * var(--i,0));}
@@ -307,7 +307,7 @@ function renderProfile(p){
     {key:'github',label:'GitHub',icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.22.66-.48v-1.7C6.73 19.91 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.8c.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.57.67.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10z"/></svg>',url:v=>`https://github.com/${v}`},
     {key:'twitch',label:'Twitch',icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>',url:v=>`https://twitch.tv/${v}`},
     {key:'tiktok',label:'TikTok',icon:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>',url:v=>`https://tiktok.com/@${v.replace('@','')}`},
-    {key:'website',label:'Website',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2" transform="rotate(45 12 12)"/></svg>',url:v=>v.startsWith('http')?v:`https://${v}`},
+    {key:'website',label:'Website',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="1" transform="rotate(45 12 14.5)"/><path d="M12 2l2.5 2.5L12 7 9.5 4.5z"/></svg>',url:v=>v.startsWith('http')?v:`https://${v}`},
   ];
   const socialsRow=document.getElementById('socials-row');
   socialsRow.innerHTML='';
